@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natural Rice - អង្ករសរីរាង្គទំនុកចិត្តខ្ពស់</title>
+    <style>
+      html {
+        scroll-behavior: smooth; /* ធ្វើឱ្យពេលចុចម៉ឺនុយវាអូសចុះក្រោមរអិលស្អាត */
+      }
+      body {
+        font-family: "Khmer OS Battambang", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f9f6;
+        color: #333;
+        line-height: 1.8;
+      }
+
+      /* ១. របារម៉ឺនុយខាងលើ (Navigation Bar) */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        box-sizing: border-box;
+        z-index: 1000;
+      }
+      .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #2e7d32;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 25px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #555;
+        font-weight: bold;
+        font-size: 15px;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: #2e7d32;
+      }
+
+      /* ២. ផ្នែកទី ១៖ ផ្ទាំងស្វាគមន៍ (Hero Section) */
+      .hero {
+        height: 100vh;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+          url("https://images.pexels.com/photos/6129010/pexels-photo-6129010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding: 0 20px;
+      }
+      .hero h1 {
+        font-size: 45px;
+        margin: 0 0 20px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .hero p {
+        font-size: 20px;
+        max-width: 800px;
+        margin: 0;
+        font-style: italic;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ទម្រង់កូនផ្នែកនីមួយៗ */
+      .section {
+        padding: 100px 80px 60px 80px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .section-title {
+        font-size: 28px;
+        color: #2e7d32;
+        border-bottom: 3px solid #81c784;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+        font-weight: bold;
+      }
+
+      /* ៣. ស្ទីលសម្រាប់ផ្នែក About Us */
+      .about-container {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .problem-box {
+        background-color: #ffebee;
+        border-left: 5px solid #ef5350;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 25px;
+      }
+      .mission-box {
+        background-color: #e8f5e9;
+        border-left: 5px solid #66bb6a;
+        padding: 20px;
+        border-radius: 6px;
+      }
+      h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      /* ៤. ស្ទីលសម្រាប់ផ្នែក Traceability Story */
+      .step-container {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+      }
+      .step-card {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        flex: 1;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border-top: 4px solid #2e7d32;
+      }
+      .step-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+      }
+
+      /* ៥. ស្ទីលសម្រាប់ផ្នែក Impact & Transparency */
+      .impact-grid {
+        display: flex;
+        gap: 30px;
+      }
+      .calculator-box,
+      .pricing-box {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        flex: 1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .calc-input {
+        width: 90px;
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #a5d6a7;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      /* ៦. ស្ទីលសម្រាប់ផ្នែក Our Product */
+      .product-card {
+        background: white;
+        display: flex;
+        align-items: center;
+        padding: 40px;
+        border-radius: 12px;
+        gap: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .product-img {
+        font-size: 100px;
+        background: #f1f8e9;
+        padding: 20px 40px;
+        border-radius: 10px;
+      }
+      .btn-order {
+        background-color: #ffb300;
+        color: #333;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s;
+      }
+      .btn-order:hover {
+        background-color: #ffa000;
+      }
+
+      /* ៧. ស្ទីលសម្រាប់ផ្នែក Social Proof & Trust */
+      .testimonial {
+        background: #f1f8e9;
+        padding: 30px;
+        border-radius: 12px;
+        font-style: italic;
+        border-left: 5px solid #2e7d32;
+        margin-bottom: 30px;
+      }
+      .trust-badges {
+        display: flex;
+        justify-content: space-around;
+        background: #fffde7;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px dashed #fff59d;
+        text-align: center;
+        font-weight: bold;
+        color: #f57f17;
+      }
+
+      /* Footer */
+      .footer {
+        background: #2e7d32;
+        color: white;
+        text-align: center;
+        padding: 30px;
+        margin-top: 60px;
+        font-size: 14px;
+      }
+
+      /* កំណត់ការបង្ហាញលើទូរស័ព្ទដៃ */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 15px 20px;
+          flex-direction: column;
+          gap: 15px;
+        }
+        .nav-links {
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .hero h1 {
+          font-size: 30px;
+        }
+        .hero p {
+          font-size: 16px;
+        }
+        .section {
+          padding: 80px 20px 40px 20px;
+        }
+        .step-container,
+        .impact-grid,
+        .product-card {
+          flex-direction: column;
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ១. របារម៉ឺនុយខាងលើ (Navigation Bar) -->
+    <nav class="navbar">
+      <div class="logo">
+        <img
+          src="logo.PNG"
+          alt="Natural rice logo"
+          style="height: 45px; width: auto; object-fit: contain"
+        />
+        <span>Natural Rice</span>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About Us</a>
+        <a href="#traceability">Traceability Story</a>
+        <a href="#impact">Impact & Transparency</a>
+        <a href="#product">Our Product</a>
+        <a href="#social">Social Proof & Trust</a>
+      </div>
+    </nav>
+
+    <!-- ២. ផ្នែកទី ១៖ ផ្ទាំងស្វាគមន៍ (Hero Section) -->
+    <header class="hero">
+      <h1>ស្វាគមន៍មកកាន់ Natural Rice</h1>
+      <p>
+        «Natural Rice៖ អង្ករសរីរាង្គពិតៗ ពីដៃកសិករខ្មែរ ត្រង់ទៅកាន់ផ្ទះរបស់អ្នក»
+      </p>
+      <img src="" alt="" />
+    </header>
+
+    <!-- ៣. ផ្នែកទី ២៖ អំពីអាជីវកម្ម (About Us) -->
+    <section id="about" class="section">
+      <div class="section-title">អំពីអាជីវកម្ម (About Us)</div>
+      <div class="about-container">
+        <div class="problem-box">
+          <h3>🔍 បញ្ហាគន្លឹះដែលយើងមើលឃើញ</h3>
+          <p>
+            នៅក្នុងយុគសម័យបច្ចុប្បន្ន អតិថិជនដែលរស់នៅក្នុងទីក្រុងភ្នំពេញ
+            កំពុងតែជួបប្រទះនូវវិបត្តិទំនុកចិត្តយ៉ាងខ្លាំងលើសុវត្ថិភាពចំណីអាហារ
+            ជាពិសេសគឺ «អង្ករ» ដែលជាអាហារចម្បងប្រចាំថ្ងៃ។
+            ពួកគាត់តែងតែមានក្តីបារម្ភខ្ពស់ពីសារធាតុគីមីរក្សាទុក
+            ថ្នាំប្រឆាំងខ្មូតចៃ និងការលាយឡំអង្ករក្លែងបន្លំគុណភាពនៅលើទីផ្សារ
+            ដោយសារតែគ្មានប្រព័ន្ធណាមួយអាចបញ្ជាក់ពីប្រភពដើមបានច្បាស់លាស់ឡើយ។
+          </p>
+          <p>
+            ទន្ទឹមនឹងបញ្ហានេះ
+            បែរជាមានការពិតដ៏ឈឺចាប់មួយកើតឡើងចំពោះបងប្អូនប្រជាកសិករខ្មែរនៅតាមជនបទ។
+            ពួកគាត់បានខិតខំដាំដុះស្រូវតាមបែបធម្មជាតិ ដោយប្រើកម្លាំងញើសឈាម
+            និងមិនពឹងផ្អែកលើសារធាតុគីមីបំផ្លាញសុខភាពឡើយ ប៉ុន្តែដល់ពេលប្រមូលផល
+            ពួកគាត់បែរជាមិនមានទីផ្សារច្បាស់លាស់
+            ត្រូវបង្ខំចិត្តលក់ស្រូវក្នុងតម្លៃថោកជារៀងរាល់ឆ្នាំ
+            និងរងការបង្អាប់ថ្លៃយ៉ាងអយុត្តិធម៌ពីសំណាក់ឈ្មួញកណ្តាល
+            ដែលធ្វើឱ្យជីវភាពកាន់តែដុនដាបទៅៗ។
+          </p>
+        </div>
+        <div class="mission-box">
+          <h3>🎯 បេសកកម្មដ៏មានអត្ថន័យរបស់ក្រុមយើង</h3>
+          <p>
+            ដោយមើលឃើញពីផលលំបាកទ្វេភាគីនេះ ក្រុម
+            <strong>Natural Rice</strong> ត្រូវបានបង្កើតឡើងក្នុងគោលបំណងតែមួយគត់
+            គឺ <strong>«ធ្វើជាស្ពានចម្លងទំនុកចិត្តប្រកបដោយនិរន្តរភាព»</strong>។
+            យើងមិនមែនត្រឹមតែលក់អង្ករនោះទេ ប៉ុន្តែយើងប្រើប្រាស់បច្ចេកវិទ្យា QR
+            Code ដើម្បីតភ្ជាប់បេះដូងអ្នកក្រុង និងញើសឈាមកសិករខេត្តបាត់ដំបង។
+          </p>
+          <p>
+            បេសកកម្មរបស់យើងគឺ ផ្តល់ជូននូវអង្ករសរីរាង្គដែលមានគុណភាពខ្ពស់បំផុត
+            និងមានសុវត្ថិភាព ១០០% ជូនដល់គ្រប់ក្រុមគ្រួសារនៅទីក្រុងភ្នំពេញ
+            ព្រមទាំងចូលរួមការពារបរិស្ថាន។ ក្នុងពេលជាមួយគ្នា
+            យើងប្តេជ្ញាបង្កើនប្រាក់ចំណូល ដោះស្រាយបញ្ហាទីផ្សារ
+            និងធានាទិញស្រូវក្នុងតម្លៃមួយដ៏សមរម្យ
+            និងផ្តល់យុត្តិធម៌បំផុតជូនកសិករខ្មែរ
+            ដើម្បីលើកកម្ពស់ជីវភាពរស់នៅរបស់ពួកគាត់
+            និងជំរុញសហគមន៍កសិកម្មឱ្យមាននិរន្តរភាពទៅថ្ងៃអនាគត។
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ៤. ផ្នែកទី ៣៖ ខ្សែសង្វាក់ផលិតកម្ម (Traceability Story) -->
+    <section id="traceability" class="section">
+      <div class="section-title">ខ្សែសង្វាក់ផលិតកម្ម (Traceability Story)</div>
+      <div class="step-container">
+        <div class="step-card">
+          <div class="step-icon">🌾</div>
+          <h3>១. ដំណាក់កាលដាំដុះ</h3>
+          <p>
+            ស្រូវត្រូវបានដាំដុះដោយប្រើប្រាស់ទឹកភ្លៀងធម្មជាតិ
+            និងការថែទាំតាមបែបសរីរាង្គ ដោយកាត់បន្ថយការប្រើប្រាស់សារធាតុគីមី
+            ដើម្បីធានាសុខភាព។
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">👨‍🌾</div>
+          <h3>២. ដំណាក់កាលប្រមូលផល</h3>
+          <p>
+            ច្រូតកាត់ដោយយកចិត្តទុកដាក់ខ្ពស់ពីដៃកសិករពិតៗនៅក្នុងសហគមន៍
+            រួចឆ្លងកាត់ការកិននិងសម្អាតយ៉ាងមានអនាម័យ។
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">🛍</div>
+          <h3>៣. ដំណាក់កាលវេចខ្ចប់</h3>
+          <p>
+            ពួកយើងប្រើប្រាស់
+            <strong>«ថង់ក្រដាសបរិស្ថាន (Eco-Friendly Paper Bags)»</strong>
+            ជំនួសឱ្យថង់ប្លាស្ទិកធម្មតា
+            ដែលវាមានសមត្ថភាពខ្ពស់ក្នុងការរក្សាគុណភាពអង្ករ ការពារសើម
+            និងរក្សាក្លិនក្រអូបពីធម្មជាតិបានយ៉ាងល្អ អមដោយការបិទស្លាក
+            <strong>QR Code ធានាប្រភពដើម</strong>។
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- ៥. ផ្នែកទី ៤៖ ផលជះ និងតម្លាភាព (Impact & Transparency) -->
+    <section id="impact" class="section">
+      <div class="section-title">ផលជះ និងតម្លាភាព (Impact & Transparency)</div>
+      <div class="impact-grid">
+        <div class="calculator-box">
+          <h3>📊 គណនាផលជះនៃការគាំទ្ររបស់អ្នក</h3>
+          <p>វាយបញ្ចូលចំនួនគីឡូក្រាមអង្ករដែលអ្នកចង់ទិញក្នុង ១ ខែ៖</p>
+          <input
+            type="number"
+            id="riceInput"
+            class="calc-input"
+            value="10"
+            oninput="calculateImpact()"
+          />
+          <span>គីឡូក្រាម (kg)</span>
+          <p style="margin-top: 20px; font-weight: bold; color: #2e7d32">
+            រាល់ការជាវរបស់អ្នកនឹងបានចូលរួម៖
+          </p>
+          <p>
+            • 🌾 បង្កើនប្រាក់ចំណូលកសិករផ្ទាល់បាន៖
+            <span id="incomeResult" style="font-weight: bold; color: #ff9100"
+              >$2.25</span
+            >
+          </p>
+          <p>
+            • 🛡 កាត់បន្ថយការប្រើថង់ប្លាស្ទិកបាន៖
+            <span id="bagResult" style="font-weight: bold; color: #ff9100"
+              >2</span
+            >
+            ថង់ (ព្រោះយើងប្រើថង់ក្រដាស)
+          </p>
+          <p>
+            • 💚 ធានាសុខភាពគ្រួសារពីគីមីបាន៖
+            <span id="dayResult" style="font-weight: bold; color: #ff9100"
+              >30</span
+            >
+            ថ្ងៃពេញ
+          </p>
+        </div>
+        <div class="pricing-box">
+          <h3>💡 តម្លាភាពតម្លៃ ($1.20 / គីឡូក្រាម)</h3>
+          <p>
+            យើងមានមោទនភាពក្នុងការបង្ហាញតម្លាភាពតម្លៃជូនអតិថិជន។
+            រាល់ថវិការបស់លោកអ្នកដែលបានចំណាយលើអង្កររបស់យើង
+            ត្រូវបានបែងចែកច្បាស់លាស់ទៅលើ៖
+          </p>
+          <ul>
+            <li>ថ្លៃទិញស្រូវផ្ទាល់ពីដៃកសិករក្នុងតម្លៃខ្ពស់សមរម្យ</li>
+            <li>ថ្លៃដំណើរការផលិត និងវេចខ្ចប់ថង់ក្រដាសបរិស្ថាន</li>
+            <li>ថ្លៃដឹកជញ្ជូន និងចែកចាយ</li>
+            <li>ការអភិវឌ្ឍប្រព័ន្ធបច្ចេកវិទ្យា QR Code ពិនិត្យប្រភពដើម</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ៦. ផ្នែកទី ៥៖ ផលិតផលរបស់យើង (Our Product) -->
+    <section id="product" class="section">
+      <div class="section-title">ផលិតផលរបស់យើង (Our Product)</div>
+      <div class="product-card">
+        <div class="product-img">🛍</div>
+        <div>
+          <h3>អង្ករផ្ការំដួលសរីរាង្គ (Premium Organic Rice)</h3>
+          <p>
+            ជាប្រភេទអង្ករលំដាប់ថ្នាក់ខ្ពស់ ផ្តល់នូវបាយដែលមានលក្ខណៈទន់ល្មើយ
+            ក្លិនក្រអូបឈ្ងុយធម្មជាតិ និងគ្មានសារធាតុរក្សាទុកគីមីឡើយ។
+          </p>
+          <p>
+            <strong>ទំហំវេចខ្ចប់៖</strong>
+            រចនាឡើងយ៉ាងសម្រិតសម្រាំងក្នុងថង់ក្រដាសបែបបរិស្ថាន ងាយស្រួលរក្សាទុក
+            និងសាកសមបំផុតសម្រាប់តម្រូវការរស់នៅរបស់គ្រួសារក្នុងយុគសម័យថ្មី។
+          </p>
+          <a
+            href="https://t.me/YourTelegramUsername"
+            target="_blank"
+            class="btn-order"
+            >🛒 ទំនាក់ទំនងបញ្ជាទិញ</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ៧. ផ្នែកទី ៦៖ សំឡេងសហគមន៍ និងការធានា (Social Proof & Trust) -->
+    <section id="social" class="section">
+      <div class="section-title">
+        សំឡេងសហគមន៍ និងការធានា (Social Proof & Trust)
+      </div>
+      <div class="testimonial">
+        "ចាប់តាំងពីមានការគាំទ្រពីគម្រោងរបស់ក្មួយៗក្រុម Natural Rice មក
+        ពួកខ្ញុំក្នុងសហគមន៍លែងបារម្ភរឿងឈ្មួញកណ្តាលបង្អាប់ថ្លៃ
+        ហើយមានកម្លាំងចិត្តក្នុងការដាំដុះអង្ករធម្មជាតិល្អៗជូនអ្នកក្រុងហូប។"
+        <br /><span
+          style="
+            font-weight: bold;
+            color: #2e7d32;
+            font-style: normal;
+            display: block;
+            margin-top: 10px;
+          "
+          >— លោកពូកសិករ តំណាងសហគមន៍ខេត្តបាត់ដំបង</span
+        >
+      </div>
+      <div class="trust-badges">
+        <div>🌿 ធម្មជាតិពិតៗ ១០០%</div>
+        <div>🛡 គ្មានសារធាតុគីមីរក្សាទុក</div>
+        <div>🤝 គាំទ្រសហគមន៍កសិករផ្ទាល់</div>
+        <div>🔄 ធានាសងលុយវិញ ១០០%</div>
+      </div>
+      <p
+        style="
+          color: red;
+          text-align: center;
+          font-weight: bold;
+          margin-top: 20px;
+        "
+      >
+        ⚠️ យើងខ្ញុំហ៊ានធានាជូន៖ ប្រសិនបើលោកអ្នកស្កេនទៅមិនឃើញប្រភពដើមពិតប្រាកដ
+        ឬរកឃើញសារធាតុគីមីខុសពីការសន្យា ក្រុមការងារ Natural Rice
+        យើងខ្ញុំនឹងធានាសងប្រាក់ជូនវិញ ១០០%!
+      </p>
+    </section>
+
+    <!-- ផ្នែក Footer ខាងក្រោមបង្អស់ -->
+    <footer class="footer">
+      <p>
+        © 2026 អភិវឌ្ឍដោយក្រុមនិស្សិត Natural Rice - ដើម្បីកសិករខ្មែរ
+        និងសុខភាពអ្នកក្រុង
+      </p>
+    </footer>
+    <!-- មុខងារ JavaScript សម្រាប់គណនាលេខដោយស្វ័យប្រវត្តក្នុងផ្នែកទី ៤ -->
+    <script>
+      function calculateImpact() {
+        var kg = document.getElementById("riceInput").value;
+        if (kg < 0 || kg == "") kg = 0;
+
+        // គណនាលេខផលជះ (ឧបមាថា ១គីឡូបានទៅកសិករ $0.225 និងប្រើប្រាស់កញ្ចប់ក្រដាសរៀងរាល់ ៥គីឡូ)
+        var income = (kg * 0.225).toFixed(2);
+        var bags = Math.ceil(kg / 5);
+
+        document.getElementById("incomeResult").innerHTML = "$" + income;
+        document.getElementById("bagResult").innerHTML = bags;
+      }
+    </script>
+  </body>
+</html>
